@@ -1,0 +1,30 @@
+{
+  "type": "datasource",
+  "metadata": {},
+  "schema": {
+    "docs": "https://www.npmjs.com/package/soap#clientmethodasyncargs-options---call-method-on-the-soap-service",
+    "friendlyName": "SOAP",
+    "type": "API",
+    "description": "Performs a basic SOAP call to a web service",
+    "datasource": {
+      "url": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "query": {
+      "create": {
+        "type": "sql"
+      },
+      "update": {
+        "type": "sql"
+      },
+      "read": {
+        "type": "sql"
+      },
+      "delete": {
+        "type": "sql"
+      }
+    }
+  }
+}
