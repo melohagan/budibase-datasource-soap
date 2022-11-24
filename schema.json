@@ -14,16 +14,64 @@
     },
     "query": {
       "create": {
-        "type": "sql"
+        "type": "fields",
+        "readable": true,
+        "fields": {
+          "soapAction": {
+            "type": "string",
+            "required": false,
+            "display": "SOAP Action"
+          },
+          "body": {
+            "type": "json",
+            "required": false
+          }
+        }
       },
       "update": {
-        "type": "sql"
+        "type": "fields",
+        "readable": true,
+        "fields": {
+          "soapAction": {
+            "type": "string",
+            "required": false,
+            "display": "SOAP Action"
+          },
+          "body": {
+            "type": "json",
+            "required": false
+          }
+        }
       },
       "read": {
-        "type": "sql"
+        "type": "fields",
+        "readable": true,
+        "fields": {
+          "soapAction": {
+            "type": "string",
+            "required": false,
+            "display": "SOAP Action"
+          },
+          "body": {
+            "type": "json",
+            "required": false
+          }
+        }
       },
       "delete": {
-        "type": "sql"
+        "type": "fields",
+        "readable": true,
+        "fields": {
+          "soapAction": {
+            "type": "string",
+            "required": false,
+            "display": "SOAP Action"
+          },
+          "body": {
+            "type": "json",
+            "required": false
+          }
+        }
       }
     }
   }

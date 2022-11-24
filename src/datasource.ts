@@ -1,6 +1,8 @@
 import { IntegrationBase } from "@budibase/types"
 // @ts-ignore
 import soapRequest from "easy-soap-request"
+// @ts-ignore
+import xml2js from "xml2js"
 
 class CustomIntegration implements IntegrationBase {
   private readonly url: string
@@ -9,30 +11,40 @@ class CustomIntegration implements IntegrationBase {
     this.url = config.url
   }
 
-  async execute(query: { sql: string }) {
-    const headers = {
+  async execute(query: { body: string; soapAction: string }) {
+    const headers: any = {
       'Content-Type': 'text/xml;charset=UTF-8',
     }
-    return await soapRequest({
+    if (query.soapAction) {
+      headers["soapAction"] = query.soapAction
+    }
+    const responseBody = await soapRequest({
       url: this.url,
       headers,
-      xml: query.sql
+      xml: query.body
     })
+    const parseString = xml2js.parseString
+    let jsonBody
+    parseString(responseBody?.response?.body, (err: any, res: any) => {
+      jsonBody = res["soap:Envelope"]["soap:Body"][0]
+      if (err) throw err
+    })
+    return jsonBody
   }
 
-  async create(query: { sql: string }) {
+  async create(query: { body: string; soapAction: string }) {
     return await this.execute(query)
   }
 
-  async read(query: { sql: string }) {
+  async read(query: { body: string; soapAction: string }) {
     return await this.execute(query)
   }
 
-  async update(query: { sql: string }) {
+  async update(query: { body: string; soapAction: string }) {
     return await this.execute(query)
   }
 
-  async delete(query: { sql: string }) {
+  async delete(query: { body: string; soapAction: string }) {
     return await this.execute(query)
   }
 }
