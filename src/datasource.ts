@@ -26,7 +26,11 @@ class CustomIntegration implements IntegrationBase {
     const parseString = xml2js.parseString
     let jsonBody
     parseString(responseBody?.response?.body, (err: any, res: any) => {
-      jsonBody = res["soap:Envelope"]["soap:Body"][0]
+      if (res["soap:Envelope"]) {
+        jsonBody = res["soap:Envelope"]["soap:Body"][0]
+      } else {
+        jsonBody = res["SOAP-ENV:Envelope"]["SOAP-ENV:Body"][0]
+      }
       if (err) throw err
     })
     return jsonBody

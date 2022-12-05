@@ -1,6 +1,6 @@
 {
   "name": "budibase-soap",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Connect to web services using SOAP in Budibase",
   "main": "src/index.ts",
   "license": "MIT",
