@@ -27,10 +27,12 @@ class CustomIntegration implements IntegrationBase {
     let jsonBody
     parseString(responseBody?.response?.body, (err: any, res: any) => {
       if (res["soap:Envelope"]) {
-        jsonBody = res["soap:Envelope"]["soap:Body"][0]
+          jsonBody = res["soap:Envelope"]["soap:Body"][0]
+      } else if (res["SOAP-ENV:Envelope"]) {
+          jsonBody = res["SOAP-ENV:Envelope"]["SOAP-ENV:Body"][0]
       } else {
-        jsonBody = res["SOAP-ENV:Envelope"]["SOAP-ENV:Body"][0]
-      }
+        jsonBody = res["S:Envelope"]["S:Body"][0]
+    }
       if (err) throw err
     })
     return jsonBody
