@@ -26,9 +26,9 @@ class CustomIntegration implements IntegrationBase {
     const parseString = xml2js.parseString
     let jsonBody
     parseString(responseBody?.response?.body, (err: any, res: any) => {
-      const prefixFound = responseBody.response.body.match(/<(.+?):(envelope)/i)
-      const prefix = prefixFound === null ? "" : prefixFound[1].trim() + ":"
-      jsonBody = res[prefix + "Envelope"][prefix + "Body"][0]
+      const prefixFound = responseBody?.response?.body?.match(/<(.+?):(envelope)/i)
+      const prefix = prefixFound?.[1] ? prefixFound[1].trim() + ":" : ""
+      jsonBody = res[prefix + "Envelope"]?.[prefix + "Body"]?.[0] ?? {}
       if (err) throw err
     })
     return jsonBody
